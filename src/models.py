@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from dotenv import load_dotenv
 from sqlalchemy import (Column, DateTime, ForeignKey, Integer, String,
@@ -56,6 +57,14 @@ class Author(Base):
     articles = relationship("Article", back_populates="author")
     videos = relationship("Video", back_populates="author")
     books = relationship("Book", back_populates="author")
+
+
+class WebPageArchive(Base):
+    __tablename__ = 'web_page_archives'
+    id = Column(Integer, primary_key=True)
+    url = Column(String, nullable=False)
+    html = Column(String, nullable=False)
+    archived = Column(DateTime, default=datetime.utcnow, nullable=False)
 
 
 Base.metadata.create_all(bind=engine)
