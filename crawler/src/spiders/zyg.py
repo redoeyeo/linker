@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.exceptions import CloseSpider
 
-from src.items import ArticleItem
+from ..items import ArticleItem
 
 
 class PavelSpider(scrapy.Spider):

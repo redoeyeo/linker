@@ -9,13 +9,10 @@
 
 BOT_NAME = "linker"
 
-SPIDER_MODULES = ["src.spiders"]
-NEWSPIDER_MODULE = "src.spiders"
+SPIDER_MODULES = ["crawler.src.spiders"]
+NEWSPIDER_MODULE = "crawler.src.spiders"
 
 ADDONS = {}
-
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "src (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -37,17 +34,7 @@ DOWNLOAD_DELAY = 1
 #    "Accept-Language": "en",
 # }
 
-# Enable or disable spider middlewares
-# See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    "src.middlewares.CustomSpiderMiddleware": 543,
-# }
 
-# Enable or disable downloader middlewares
-# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    "src.middlewares.CustomDownloaderMiddleware": 543,
-# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -58,7 +45,7 @@ DOWNLOAD_DELAY = 1
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "src.pipelines.ArticlesPipeline": 300,
+    "crawler.src.pipelines.ArticlesPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
