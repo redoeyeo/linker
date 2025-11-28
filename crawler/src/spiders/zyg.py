@@ -1,7 +1,6 @@
 import scrapy
-from scrapy.exceptions import CloseSpider
 
-from ..items import ArticleItem
+from crawler.src.items import ArticleItem
 
 
 class PavelSpider(scrapy.Spider):
@@ -29,11 +28,6 @@ class PavelSpider(scrapy.Spider):
         next_page = response.xpath("//nav[@id='nav-below']//a/@href").get()
         if next_page:
             yield response.follow(next_page, self.parse_blog)
-
-    def handle_spider_error(self, failure, response, spider):
-        """Обработка ошибок паука - остановка при любых исключениях"""
-        self.logger.error(f"Spider error on {response.url}: {failure.value}")
-        raise CloseSpider(reason=f"Error processing page: {failure.value}")
 
     def parse_article(self, response):
         article_url = response.url

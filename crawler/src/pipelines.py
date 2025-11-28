@@ -2,20 +2,13 @@ import logging
 
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
+
 from crawler.models import Article, Author
 
 logger = logging.getLogger(__name__)
 
 
 class ArticlesPipeline:
-    def open_spider(self, spider):
-        """Вызывается при запуске паука."""
-        pass
-
-    def close_spider(self, spider):
-        """Вызывается при завершении паука."""
-        pass
-
     async def process_item(self, item, spider):
         adapter = ItemAdapter(item)
         if not adapter.get('author_id'):
