@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class ArticlesPipeline:
-    async def process_item(self, item, spider):
+    async def process_item(self, item, _spider):
         adapter = ItemAdapter(item)
         if not adapter.get('author_id'):
             raise DropItem('All articles should contain author_id')
