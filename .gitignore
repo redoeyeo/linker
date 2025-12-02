@@ -192,8 +192,6 @@ alembic/versions/
 
 # Python playground and test files
 playground.py
-test_*.py
-*_test.py
 
 # IDE and OS
 .DS_Store
