@@ -5,11 +5,11 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     url = models.CharField(max_length=100, null=True, blank=True)
-    article_authors = models.ManyToManyField(
+    article_authors: models.ManyToManyField = models.ManyToManyField(
         'Article', related_name='article_authors', blank=True)
-    video_authors = models.ManyToManyField(
+    video_authors: models.ManyToManyField = models.ManyToManyField(
         'Video', related_name='video_authors', blank=True)
-    book_authors = models.ManyToManyField(
+    book_authors: models.ManyToManyField = models.ManyToManyField(
         'Book', related_name='book_authors', blank=True)
 
     class Meta:
@@ -35,9 +35,6 @@ class Video(models.Model):
     author = models.ForeignKey(
         'Author', on_delete=models.CASCADE, related_name='authored_videos')
 
-    def __str__(self):
-        return self.title or f"Video {self.id}"
-
     class Meta:
         db_table = 'videos'
 
@@ -50,9 +47,6 @@ class Book(models.Model):
     author = models.ForeignKey(
         'Author', on_delete=models.CASCADE, related_name='authored_books')
 
-    def __str__(self):
-        return self.title or f"Book {self.id}"
-
     class Meta:
         db_table = 'books'
 
@@ -61,9 +55,6 @@ class WebPageArchive(models.Model):
     url = models.URLField()
     html = models.TextField()
     archived = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.url
 
     class Meta:
         db_table = 'web_page_archives'
