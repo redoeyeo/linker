@@ -23,9 +23,6 @@ class Article(models.Model):
     author = models.ForeignKey(
         'Author', on_delete=models.CASCADE, related_name='authored_articles')
 
-    def __str__(self):
-        return self.title or f"Article {self.id}"
-
     class Meta:
         db_table = 'articles'
 
