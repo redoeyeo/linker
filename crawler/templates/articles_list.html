@@ -12,6 +12,14 @@
             border-radius: 0.2em;
         }
     </style>
+    <style>
+        p {
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -29,6 +37,23 @@
             </div>
         </form>
 
+        <!-- Информация об авторе и названии статьи -->
+        {% for article in articles %}
+        <div class="author-article-info mb-3">
+            {% with author=article.author %}
+            {% if author.first_name and author.last_name %}
+                <strong>{{ author.first_name }} {{ author.last_name }}</strong>
+                {% elif author.url %}
+                <strong>{{ author.url }}</strong>
+            {% else %}
+            {% endif %}
+
+            {% endwith %}
+            <a href="#article-{{ forloop.counter0 }}" class="article-link">
+                {{ article.title }}
+            </a>
+        </div>
+        {% endfor %}
         <!-- Результаты поиска -->
         {% if articles %}
             <h3 class="mb-3">Найденные статьи ({{ articles|length }}):</h3>
@@ -44,13 +69,16 @@
                     </thead>
                     <tbody>
                         {% for article in articles %}
-                            <tr>
+                            <tr id="article-{{ forloop.counter0 }}">
                                 <td><strong>{{ article.title }}</strong></td>
                                 <td>
                                     {% if article.content %}
                                         {% if search_query %}
                                             {% load text_extras %}
-                                            {{ article.content|highlight:search_query|linebreaksbr|safe }}
+                                            {% for line in article.lines %}
+                                            <p> {{line|highlight:search_query|safe}} </p>
+                                            {% endfor %}
+
                                         {% else %}
                                             {{ article.content|linebreaksbr }}
                                         {% endif %}

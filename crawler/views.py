@@ -1,5 +1,6 @@
 import random
 
+from django.db.models import Q
 from django.shortcuts import render
 
 from .forms import SearchForm
@@ -15,7 +16,8 @@ def search_articles(request):
         query = form.cleaned_data['query']
         if query:
             articles = Article.objects.filter(
-                content__icontains=query
+                Q(content__icontains=query) | Q(title__icontains=query)
+
             ).order_by('title')
             search_query = query
 

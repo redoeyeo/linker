@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -22,6 +23,17 @@ class Article(models.Model):
     url = models.URLField(null=True, blank=True)
     author = models.ForeignKey(
         'Author', on_delete=models.CASCADE, related_name='authored_articles')
+
+    @property
+    def lines(self):
+        if not self.content:
+            return []
+        content = str(self.content)
+        lines = content.splitlines()
+        if len(lines) == 1:
+            lines = content.split('.')
+            lines = [f'{line}.'.strip() for line in lines]
+        return lines
 
     class Meta:
         db_table = 'articles'
