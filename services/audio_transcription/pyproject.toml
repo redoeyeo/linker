@@ -1,0 +1,23 @@
+[project]
+name = "audio-transcription"
+version = "0.1.0"
+description = "Расшифровка аудио через VOSK"
+authors = [{ name = "Nikita Grigorenko", email = "redoeyeo200@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi (>=0.124.0,<0.125.0)",
+    "uvicorn (>=0.38.0,<0.39.0)",
+    "vosk (>=0.3.45,<0.4.0)",
+    "aiofiles (>=25.1.0,<26.0.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "pydub (>=0.25.1,<0.26.0)",
+    "audioop-lts (>=0.2.2,<0.3.0)",
+    "httpx[cli] (>=0.28.1,<0.29.0)",
+    "pytest-asyncio (>=1.3.0,<2.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

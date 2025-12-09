@@ -36,8 +36,34 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+  audio_transcription_prod:
+    container_name: audio_transcription_prod
+    build:
+      context: ./services/audio_transcription
+      dockerfile: Dockerfile
+    environment:
+      VOSK_MODEL_NAME: vosk-model-small-ru-0.22
+    ports:
+      - "8300:8000"
+    volumes:
+      - ./services/audio_transcription/models/:/app/models:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 8192M
+        reservations:
+          cpus: '0.5'
+          memory: 4096M
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 volumes:
   pgdata:
     driver: local
+
 
